@@ -51,10 +51,11 @@ This project provides a complete, ready-to-use ROS2 Jazzy development environmen
 ## How It Works
 
 ### Architecture Overview
-<img src="architecture.png">
+<img width="700" height="4000" alt="architecture" src="https://github.com/user-attachments/assets/deb1de3f-e8ba-4ea8-bf97-1a56f3490b13" />
 
 ### Container Startup Sequence
-<img src="startupsequence.png">
+<img width="1523" height="869" alt="startupsequence" src="https://github.com/user-attachments/assets/27ea445c-e127-4fca-a428-ea1ce556af6c" />
+
 
 ### Technology Stack
 
@@ -94,7 +95,7 @@ Your workspace folder is "mounted" into the container:
   - Linux: [Docker Engine](https://docs.docker.com/engine/install/)
 - **VS Code**: [Download here](https://code.visualstudio.com/)
 - **Dev Containers Extension**: Install from VS Code Extensions (Ctrl+Shift+X, search "Dev Containers")
-<img src="extension.png">
+<img width="1873" height="1048" alt="extension" src="https://github.com/user-attachments/assets/3d2e20d6-12ff-445a-b0e6-4445b40ea577" />
 ### System Requirements
 
 - **Minimum**: 4 CPU cores, 8GB RAM, 20GB free disk space
@@ -179,7 +180,8 @@ cd turtlebot3_jazzy_devcontainer
    - VS Code will detect the dev container configuration
    - Click "Reopen in Container" when prompted
    - Or press `F1` → "Dev Containers: Reopen in Container"
-   <img src="reopen.png">
+<img width="589" height="73" alt="image" src="https://github.com/user-attachments/assets/da04714c-19a7-4c40-ab4d-db9ca74156d8" />
+
 
 3. **Wait for the build** (10-15 minutes first time):
    - Downloads Ubuntu 24.04 base image (~1GB)

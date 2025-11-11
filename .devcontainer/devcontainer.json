@@ -1,0 +1,66 @@
+{
+  "name": "ROS2 Jazzy TurtleBot3",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspace/turtlebot3_ws",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace/turtlebot3_ws,type=bind",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "ms-iot.vscode-ros"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/bin/python3",
+        "ros.distro": "jazzy",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": false,
+      "username": "automatic",
+      "upgradePackages": false
+    },
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "password": "ros",
+      "webPort": "6080",
+      "vncPort": "5901"
+    }
+  },
+
+  "forwardPorts": [6080, 5901],
+  
+  "portsAttributes": {
+    "6080": {
+      "label": "Desktop (noVNC)",
+      "onAutoForward": "openBrowser"
+    }
+  },
+
+  "remoteEnv": {
+    "DISPLAY": ":1",
+    "ROS_DOMAIN_ID": "30",
+    "TURTLEBOT3_MODEL": "burger",
+    "RMW_IMPLEMENTATION": "rmw_cyclonedds_cpp",
+    "GZ_VERSION": "harmonic",
+    "QT_QPA_PLATFORM": "xcb"
+  },
+
+  "runArgs": [
+    "--network=host",
+    "--privileged",
+    "--shm-size=2gb"
+  ],
+
+  "postCreateCommand": "bash /workspace/turtlebot3_ws/.devcontainer/post-create.sh",
+  "postStartCommand": "bash /workspace/turtlebot3_ws/.devcontainer/post-start.sh"
+}

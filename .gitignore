@@ -1,0 +1,25 @@
+# ROS2 build artifacts
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gazebo
+.gazebo/
+
+# Temporary
+*.tmp
+*.bak
+*.log

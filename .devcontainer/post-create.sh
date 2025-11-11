@@ -44,8 +44,19 @@ mkdir -p /workspace/turtlebot3_ws/src
 # Navigate to workspace src
 cd /workspace/turtlebot3_ws/src
 
-# Clone TurtleBot3 repositories if not exist
+# Check if repositories exist AND have content (not empty directories)
+NEED_CLONE=false
+
 if [ ! -d "turtlebot3" ]; then
+    NEED_CLONE=true
+    echo "TurtleBot3 directory not found"
+elif [ ! -f "turtlebot3/turtlebot3/package.xml" ]; then
+    NEED_CLONE=true
+    echo "TurtleBot3 directory exists but is empty - will re-clone"
+    rm -rf DynamixelSDK turtlebot3 turtlebot3_msgs turtlebot3_simulations
+fi
+
+if [ "$NEED_CLONE" = true ]; then
     echo "Cloning TurtleBot3 repositories..."
     
     git clone -b jazzy https://github.com/ROBOTIS-GIT/DynamixelSDK.git
@@ -55,8 +66,13 @@ if [ ! -d "turtlebot3" ]; then
     
     echo "[OK] Repositories cloned"
 else
-    echo "[OK] TurtleBot3 repositories already exist"
+    echo "[OK] TurtleBot3 repositories already exist with content"
 fi
+
+# Verify we have package.xml files
+cd /workspace/turtlebot3_ws
+PACKAGE_COUNT=$(find src/ -name "package.xml" 2>/dev/null | wc -l)
+echo "Verified $PACKAGE_COUNT package.xml files"
 
 # Back to workspace root
 cd /workspace/turtlebot3_ws

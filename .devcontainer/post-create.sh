@@ -53,9 +53,9 @@ if [ ! -d "turtlebot3" ]; then
     git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3.git
     git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
     
-    echo "✓ Repositories cloned"
+    echo "âœ“ Repositories cloned"
 else
-    echo "✓ TurtleBot3 repositories already exist"
+    echo "âœ“ TurtleBot3 repositories already exist"
 fi
 
 # Back to workspace root
@@ -79,5 +79,5 @@ rosdep install --from-paths src --ignore-src -r -y || true
 mkdir -p ~/maps
 
 echo "=========================================="
-echo "✓ Post-create setup complete!"
+echo "âœ“ Post-create setup complete!"
 echo "=========================================="

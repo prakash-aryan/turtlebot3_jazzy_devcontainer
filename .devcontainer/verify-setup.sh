@@ -21,10 +21,10 @@ test_command() {
     
     echo -n "Testing: $description... "
     if eval $command > /dev/null 2>&1; then
-        echo -e "${GREEN}✓ PASS${NC}"
+        echo -e "${GREEN}âœ“ PASS${NC}"
         return 0
     else
-        echo -e "${RED}✗ FAIL${NC}"
+        echo -e "${RED}âœ— FAIL${NC}"
         return 1
     fi
 }
@@ -94,27 +94,27 @@ echo "----------------------------------------"
 
 echo -n "Checking ROS_DISTRO... "
 if [ "$ROS_DISTRO" = "jazzy" ]; then
-    echo -e "${GREEN}✓ PASS${NC} (jazzy)"
+    echo -e "${GREEN}âœ“ PASS${NC} (jazzy)"
     ((passed++))
 else
-    echo -e "${RED}✗ FAIL${NC} (found: $ROS_DISTRO)"
+    echo -e "${RED}âœ— FAIL${NC} (found: $ROS_DISTRO)"
     ((failed++))
 fi
 
 echo -n "Checking TURTLEBOT3_MODEL... "
 if [ ! -z "$TURTLEBOT3_MODEL" ]; then
-    echo -e "${GREEN}✓ PASS${NC} ($TURTLEBOT3_MODEL)"
+    echo -e "${GREEN}âœ“ PASS${NC} ($TURTLEBOT3_MODEL)"
     ((passed++))
 else
-    echo -e "${YELLOW}⚠ WARNING${NC} (not set, using default)"
+    echo -e "${YELLOW}âš  WARNING${NC} (not set, using default)"
 fi
 
 echo -n "Checking GZ_VERSION... "
 if [ "$GZ_VERSION" = "harmonic" ]; then
-    echo -e "${GREEN}✓ PASS${NC} (harmonic)"
+    echo -e "${GREEN}âœ“ PASS${NC} (harmonic)"
     ((passed++))
 else
-    echo -e "${YELLOW}⚠ WARNING${NC} (found: $GZ_VERSION)"
+    echo -e "${YELLOW}âš  WARNING${NC} (found: $GZ_VERSION)"
 fi
 
 echo ""
@@ -123,28 +123,28 @@ echo "----------------------------------------"
 
 echo -n "Checking workspace... "
 if [ -d "/workspace/turtlebot3_ws" ]; then
-    echo -e "${GREEN}✓ PASS${NC}"
+    echo -e "${GREEN}âœ“ PASS${NC}"
     ((passed++))
 else
-    echo -e "${RED}✗ FAIL${NC}"
+    echo -e "${RED}âœ— FAIL${NC}"
     ((failed++))
 fi
 
 echo -n "Checking source directory... "
 if [ -d "/workspace/turtlebot3_ws/src" ]; then
-    echo -e "${GREEN}✓ PASS${NC}"
+    echo -e "${GREEN}âœ“ PASS${NC}"
     ((passed++))
 else
-    echo -e "${RED}✗ FAIL${NC}"
+    echo -e "${RED}âœ— FAIL${NC}"
     ((failed++))
 fi
 
 echo -n "Checking TurtleBot3 source... "
 if [ -d "/workspace/turtlebot3_ws/src/turtlebot3" ]; then
-    echo -e "${GREEN}✓ PASS${NC}"
+    echo -e "${GREEN}âœ“ PASS${NC}"
     ((passed++))
 else
-    echo -e "${RED}✗ FAIL${NC}"
+    echo -e "${RED}âœ— FAIL${NC}"
     ((failed++))
 fi
 
@@ -154,18 +154,18 @@ echo "----------------------------------------"
 
 echo -n "Checking build directory... "
 if [ -d "/workspace/turtlebot3_ws/build" ]; then
-    echo -e "${GREEN}✓ PASS${NC}"
+    echo -e "${GREEN}âœ“ PASS${NC}"
     ((passed++))
 else
-    echo -e "${YELLOW}⚠ WARNING${NC} (not built yet)"
+    echo -e "${YELLOW}âš  WARNING${NC} (not built yet)"
 fi
 
 echo -n "Checking install directory... "
 if [ -d "/workspace/turtlebot3_ws/install" ]; then
-    echo -e "${GREEN}✓ PASS${NC}"
+    echo -e "${GREEN}âœ“ PASS${NC}"
     ((passed++))
 else
-    echo -e "${YELLOW}⚠ WARNING${NC} (not built yet)"
+    echo -e "${YELLOW}âš  WARNING${NC} (not built yet)"
 fi
 
 echo ""
@@ -182,7 +182,7 @@ fi
 echo ""
 
 if [ $failed -eq 0 ]; then
-    echo -e "${GREEN}✓ All critical checks passed!${NC}"
+    echo -e "${GREEN}âœ“ All critical checks passed!${NC}"
     echo ""
     echo "Your TurtleBot3 Jazzy environment is ready!"
     echo ""
@@ -192,7 +192,7 @@ if [ $failed -eq 0 ]; then
     echo "  3. Access VNC at http://localhost:6080"
     echo ""
 else
-    echo -e "${RED}✗ Some checks failed${NC}"
+    echo -e "${RED}âœ— Some checks failed${NC}"
     echo ""
     echo "Please review the failed tests above."
     echo "Try rebuilding the workspace with: cb"

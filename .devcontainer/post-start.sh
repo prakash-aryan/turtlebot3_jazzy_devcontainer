@@ -18,7 +18,7 @@ if [ -d "src/turtlebot3" ]; then
     colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
     
     if [ $? -eq 0 ]; then
-        echo "✓ Build successful!"
+        echo "âœ“ Build successful!"
         
         source install/setup.bash
         
@@ -28,7 +28,7 @@ if [ -d "src/turtlebot3" ]; then
         
         echo ""
         echo "=========================================="
-        echo "✓ TurtleBot3 Jazzy ready!"
+        echo "âœ“ TurtleBot3 Jazzy ready!"
         echo "=========================================="
         echo ""
         echo "Quick start:"
@@ -37,9 +37,9 @@ if [ -d "src/turtlebot3" ]; then
         echo "  VNC: http://localhost:6080 (password: ros)"
         echo "=========================================="
     else
-        echo "⚠ Build failed"
+        echo "âš  Build failed"
         exit 1
     fi
 else
-    echo "⚠ TurtleBot3 source not found"
+    echo "âš  TurtleBot3 source not found"
 fi

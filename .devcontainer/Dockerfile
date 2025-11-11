@@ -4,8 +4,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV ROS_DISTRO=jazzy
 ENV GZ_VERSION=harmonic
 
-# Update and upgrade
-RUN apt-get update && apt-get upgrade -y
+# Update and upgrade (with time sync handling)
+RUN apt-get update -o Acquire::Check-Valid-Until=false && apt-get upgrade -y
 
 # Install essential build tools
 RUN apt-get install -y \

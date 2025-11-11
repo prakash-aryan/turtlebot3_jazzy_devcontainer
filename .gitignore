@@ -23,3 +23,6 @@ Thumbs.db
 *.tmp
 *.bak
 *.log
+src/DynamixelSDK
+src/turtlebot3_simulations
+src/turtlebot3

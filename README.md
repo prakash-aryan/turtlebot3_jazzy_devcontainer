@@ -241,9 +241,17 @@ Pre-configured shortcuts are available:
 ### Manual Commands
 
 **Launch Gazebo Worlds:**
+##### Empty World
 ```bash
 ros2 launch turtlebot3_gazebo empty_world.launch.py
+```
+##### Turtlebot3 World
+```bash
 ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+```
+
+##### Empty World
+```bash
 ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
 ```
 

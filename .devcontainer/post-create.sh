@@ -9,7 +9,7 @@ echo "=========================================="
 source /opt/ros/jazzy/setup.bash
 
 # Setup bashrc for current user
-cat >> ~/.bashrc << 'EOF'
+cat >> ~/.bashrc << 'BASHRC_EOF'
 
 # ROS2 Jazzy setup
 source /opt/ros/jazzy/setup.bash
@@ -33,7 +33,7 @@ alias tb3_house='ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py'
 alias tb3_teleop='ros2 run turtlebot3_teleop teleop_keyboard'
 alias tb3_slam='ros2 launch turtlebot3_cartographer cartographer.launch.py use_sim_time:=True'
 alias tb3_nav='ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=$HOME/maps/my_map.yaml'
-EOF
+BASHRC_EOF
 
 # Fix workspace permissions
 sudo chown -R $(whoami):$(whoami) /workspace/turtlebot3_ws
@@ -53,9 +53,9 @@ if [ ! -d "turtlebot3" ]; then
     git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3.git
     git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
     
-    echo "âœ“ Repositories cloned"
+    echo "[OK] Repositories cloned"
 else
-    echo "âœ“ TurtleBot3 repositories already exist"
+    echo "[OK] TurtleBot3 repositories already exist"
 fi
 
 # Back to workspace root
@@ -79,5 +79,5 @@ rosdep install --from-paths src --ignore-src -r -y || true
 mkdir -p ~/maps
 
 echo "=========================================="
-echo "âœ“ Post-create setup complete!"
+echo "[OK] Post-create setup complete!"
 echo "=========================================="

@@ -5,6 +5,23 @@ echo "=========================================="
 echo "Post-create: Setting up TurtleBot3 Jazzy"
 echo "=========================================="
 
+# Detect GPU capabilities
+echo ""
+echo "Detecting graphics capabilities..."
+if command -v glxinfo &> /dev/null; then
+    if glxinfo | grep -q "direct rendering: Yes"; then
+        echo "[OK] Hardware GPU acceleration available"
+        USE_SOFTWARE_RENDERING=false
+    else
+        echo "[WARNING] No hardware GPU acceleration detected"
+        echo "[INFO] Will use software rendering for stability"
+        USE_SOFTWARE_RENDERING=true
+    fi
+else
+    echo "[WARNING] Cannot detect GPU - will use software rendering"
+    USE_SOFTWARE_RENDERING=true
+fi
+
 # Source ROS2 Jazzy
 source /opt/ros/jazzy/setup.bash
 
@@ -24,6 +41,20 @@ export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export GZ_VERSION=harmonic
 export QT_QPA_PLATFORM=xcb
 
+BASHRC_EOF
+
+# Add software rendering fallback if needed
+if [ "$USE_SOFTWARE_RENDERING" = true ]; then
+    cat >> ~/.bashrc << 'BASHRC_EOF'
+# Software rendering (for GPU compatibility)
+export LIBGL_ALWAYS_SOFTWARE=1
+echo "[INFO] Using software rendering for Gazebo (GPU not available)"
+BASHRC_EOF
+fi
+
+# Add aliases
+cat >> ~/.bashrc << 'BASHRC_EOF'
+
 # Useful aliases
 alias cb='cd /workspace/turtlebot3_ws && colcon build --symlink-install'
 alias sb='source /workspace/turtlebot3_ws/install/setup.bash'
@@ -33,6 +64,11 @@ alias tb3_house='ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py'
 alias tb3_teleop='ros2 run turtlebot3_teleop teleop_keyboard'
 alias tb3_slam='ros2 launch turtlebot3_cartographer cartographer.launch.py use_sim_time:=True'
 alias tb3_nav='ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=$HOME/maps/my_map.yaml'
+
+# Gazebo with software rendering fallback
+alias tb3_empty_sw='LIBGL_ALWAYS_SOFTWARE=1 ros2 launch turtlebot3_gazebo empty_world.launch.py'
+alias tb3_world_sw='LIBGL_ALWAYS_SOFTWARE=1 ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py'
+alias tb3_house_sw='LIBGL_ALWAYS_SOFTWARE=1 ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py'
 BASHRC_EOF
 
 # Fix workspace permissions
@@ -94,6 +130,27 @@ rosdep install --from-paths src --ignore-src -r -y || true
 # Create maps directory
 mkdir -p ~/maps
 
+# Create a helpful GPU info file
+cat > ~/GPU_INFO.txt << 'EOF'
+GPU Detection Results
+=====================
+
+EOF
+
+if command -v glxinfo &> /dev/null; then
+    echo "GPU Vendor: $(glxinfo | grep "OpenGL vendor" || echo "Unknown")" >> ~/GPU_INFO.txt
+    echo "GPU Renderer: $(glxinfo | grep "OpenGL renderer" || echo "Unknown")" >> ~/GPU_INFO.txt
+    echo "Direct Rendering: $(glxinfo | grep "direct rendering" || echo "Unknown")" >> ~/GPU_INFO.txt
+else
+    echo "glxinfo not available" >> ~/GPU_INFO.txt
+fi
+
+echo "" >> ~/GPU_INFO.txt
+echo "If Gazebo crashes, try: tb3_empty_sw (software rendering)" >> ~/GPU_INFO.txt
+
 echo "=========================================="
 echo "[OK] Post-create setup complete!"
+if [ "$USE_SOFTWARE_RENDERING" = true ]; then
+    echo "[INFO] Software rendering enabled (see ~/GPU_INFO.txt)"
+fi
 echo "=========================================="

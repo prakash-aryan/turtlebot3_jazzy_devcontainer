@@ -52,14 +52,20 @@
     "TURTLEBOT3_MODEL": "burger",
     "RMW_IMPLEMENTATION": "rmw_cyclonedds_cpp",
     "GZ_VERSION": "harmonic",
-    "QT_QPA_PLATFORM": "xcb"
+    "QT_QPA_PLATFORM": "xcb",
+    "LIBGL_ALWAYS_SOFTWARE": "${localEnv:LIBGL_ALWAYS_SOFTWARE:0}"
   },
 
   "runArgs": [
     "--network=host",
     "--privileged",
-    "--shm-size=2gb"
+    "--shm-size=2gb",
+    "--device=/dev/dri:/dev/dri"
   ],
+  
+  "hostRequirements": {
+    "gpu": "optional"
+  },
 
   "postCreateCommand": "bash /workspace/turtlebot3_ws/.devcontainer/post-create.sh",
   "postStartCommand": "bash /workspace/turtlebot3_ws/.devcontainer/post-start.sh"
